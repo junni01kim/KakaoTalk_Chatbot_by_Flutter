@@ -36,15 +36,14 @@ class _ChatRoomBody extends State<ChatRoomBody> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 8, horizontal: 12),
                   decoration: BoxDecoration(
-                    color: index % 2 == 0
-                        ? Colors.deepOrange
-                        : Colors.deepOrangeAccent,
+                    color: widget.chats[index].user == User.ME
+                        ? Colors.yellow
+                        : Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
                     widget.chats[index].message,
                     style: const TextStyle(
-                      color: Colors.white,
                       fontSize: 18,
                     ),
                   ),
