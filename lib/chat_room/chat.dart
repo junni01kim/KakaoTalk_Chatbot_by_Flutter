@@ -1,7 +1,9 @@
 class Chat {
-  User user = User.ME;
-  String message = "";
+  User user;
+  String message;
   DateTime time = DateTime.now();
+
+  Chat(this.user, this.message);
 }
 
 enum User {
