@@ -5,6 +5,7 @@ import 'chat.dart';
 
 class ChatRoomBody extends StatefulWidget {
   final List<Chat> chats = [];
+  final textFieldController = TextEditingController();
 
   bool _isChecked = false;
 
@@ -67,15 +68,16 @@ class _ChatRoomBody extends State<ChatRoomBody> {
               },
             ),
             Expanded(
-              child: TextField()
+              child: TextField( controller: widget.textFieldController,)
             ),
             IconButton(
                 icon: Icon(Icons.send),
                 onPressed: (){
                   setState(() {
                     !widget._isChecked
-                        ? widget.chats.add(Chat(User.ME, '안녕하세요'))
-                        : widget.chats.add(Chat(User.YOU, '안녕하세요2'));
+                        ? widget.chats.add(Chat(User.ME, widget.textFieldController.text))
+                        : widget.chats.add(Chat(User.YOU, widget.textFieldController.text));
+                    widget.textFieldController.text = "";
                   });
                 },
             )
