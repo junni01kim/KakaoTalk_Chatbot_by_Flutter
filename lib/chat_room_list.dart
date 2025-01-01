@@ -60,7 +60,8 @@ class _ChatRoomListState extends State<ChatRoomList> {
 /**
  * 채팅방 리스트의 앱바를 관리하는 클래스이다.
  *
- *
+ * 1. 화면 제목 생성
+ * 2. 우측 버튼 클릭 시, 새로운 채팅방을 만드는 모달이 등장한다.
  */
 class ChatRoomListAppBar extends StatelessWidget {
   final Function(String) onAddRoom;
