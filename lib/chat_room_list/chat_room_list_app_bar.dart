@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'new_room_dialog/new_room_dialog.dart';
+
 /**
  * 채팅방 리스트의 앱바를 관리하는 클래스이다.
  *
@@ -21,7 +23,12 @@ class ChatRoomListAppBar extends StatelessWidget {
         IconButton(
           icon: Icon(Icons.add_comment),
           onPressed: (){
-            onAddRoom('안녕');
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return NewRoomDialog(onAddRoom);
+              }
+            );
           },
         ),
       ],
