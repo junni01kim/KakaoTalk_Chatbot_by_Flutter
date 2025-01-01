@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'chat_room_list.dart';
+import 'chat_room_list/chat_room_list.dart';
 
 void main() {
   runApp(const KakaoTalk());
