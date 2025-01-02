@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../res/theme_color.dart';
 import 'chat_room_list_body.dart';
 import 'chat_room_list_app_bar.dart';
 
@@ -21,7 +22,7 @@ class _ChatRoomListState extends State<ChatRoomList> {
     return Scaffold( // 상단 제목
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: ThemeColor.background,
         title: ChatRoomListAppBar(
           onAddRoom: (String newRoomName) {
             setState(() {
