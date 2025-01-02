@@ -5,16 +5,15 @@ import 'chat.dart';
 import 'chat_board.dart';
 
 class ChatRoomBody extends StatefulWidget {
-  final List<Chat> chats = [];
-  final textFieldController = TextEditingController();
-
-  bool _isChecked = false;
-
   @override
   State<ChatRoomBody> createState() => _ChatRoomBody();
 }
 
 class _ChatRoomBody extends State<ChatRoomBody> {
+  final List<Chat> chats = [];
+  final textFieldController = TextEditingController();
+  bool _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,7 +22,7 @@ class _ChatRoomBody extends State<ChatRoomBody> {
         /**
          * 채팅 내역이 등장하는 공간
          */
-        ChatBoard(chats: widget.chats),
+        ChatBoard(chats: chats),
 
         /**
          * 채팅 작성란
@@ -31,24 +30,24 @@ class _ChatRoomBody extends State<ChatRoomBody> {
         Row(
           children: [
             CupertinoSwitch(
-              value: widget._isChecked,
-              onChanged: (bool? value) {
+              value: _isChecked,
+              onChanged: (value) {
                 setState(() {
-                  widget._isChecked = value ?? false;
+                  _isChecked = value;
                 });
               },
             ),
             Expanded(
-              child: TextField( controller: widget.textFieldController,)
+              child: TextField( controller: textFieldController,)
             ),
             IconButton(
                 icon: Icon(Icons.send),
                 onPressed: (){
                   setState(() {
-                    !widget._isChecked
-                        ? widget.chats.add(Chat(User.ME, widget.textFieldController.text))
-                        : widget.chats.add(Chat(User.YOU, widget.textFieldController.text));
-                    widget.textFieldController.text = "";
+                    !_isChecked
+                        ? chats.add(Chat(User.ME, textFieldController.text))
+                        : chats.add(Chat(User.YOU, textFieldController.text));
+                    textFieldController.text = "";
                   });
                 },
             )
@@ -56,5 +55,11 @@ class _ChatRoomBody extends State<ChatRoomBody> {
         )
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    textFieldController.dispose();
+    super.dispose();
   }
 }
