@@ -1,56 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:kakaotalk_chatbot_by_flutter/chat_room_list/chat_room_user.dart';
 
 import '../chat_room/chat_room.dart';
-import '../res/theme_color.dart';
 
-class ChatRoomListBody extends StatelessWidget {
+class ChatRoomListBody extends StatefulWidget {
   final List<String> chatRoomNames;
+  final List<bool> hoverChatRoomUser;
 
-  const ChatRoomListBody({super.key, required this.chatRoomNames});
+  const ChatRoomListBody({super.key, required this.chatRoomNames, required this.hoverChatRoomUser});
 
+  @override
+  State<ChatRoomListBody> createState() => _ChatRoomListBody();
+}
+
+class _ChatRoomListBody extends State<ChatRoomListBody> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder( // 리스트 뷰
       padding: const EdgeInsets.all(8),
-      itemCount: chatRoomNames.length,
+      itemCount: widget.chatRoomNames.length,
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ChatRoom())
+                context,
+                MaterialPageRoute(builder: (context) => ChatRoom())
             );
           },
           onHover: (value) {
-            // TODO: 색상 변경
+            setState(() {
+              widget.hoverChatRoomUser[index] = value;
+            });
           },
-          child: Container(
-            height: 50,
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            color: Colors.white,
-            child: Row(
-              spacing: 10.0,
-              children: [
-                Icon( // TODO: clip 필요
-                    Icons.person ,
-                    size: 50,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      chatRoomNames[index],
-                      style: TextStyle(
-                        color: ThemeColor.text,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                    ),
-                    Text("일반 텍스트 작성"),
-                  ],
-                )
-              ],
-            ),
+          child: ChatRoomUser(
+            userProfileName: Icons.person,
+            chatRoomName: widget.chatRoomNames[index],
+            hover: widget.hoverChatRoomUser[index]
           ),
         );
       },

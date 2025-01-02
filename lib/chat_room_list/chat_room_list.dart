@@ -16,6 +16,7 @@ class ChatRoomList extends StatefulWidget {
 
 class _ChatRoomListState extends State<ChatRoomList> {
   List<String> chatRoomNames = [];
+  List<bool> hoverChatRoomUser = [];
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +28,15 @@ class _ChatRoomListState extends State<ChatRoomList> {
           onAddRoom: (String newRoomName) {
             setState(() {
               chatRoomNames.add(newRoomName);
+              hoverChatRoomUser.add(false);
             });
           }),
       ),
 
-      body: ChatRoomListBody(chatRoomNames: chatRoomNames,)
+      body: ChatRoomListBody(
+        chatRoomNames: chatRoomNames,
+        hoverChatRoomUser: hoverChatRoomUser,
+      )
     );
   }
 }
