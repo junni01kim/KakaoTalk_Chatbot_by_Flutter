@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../res/theme_color.dart';
 import 'chat.dart';
@@ -23,23 +23,34 @@ class ChatBoard extends StatelessWidget {
             alignment: chats[index].user == User.ME
                 ? Alignment.centerRight
                 : Alignment.centerLeft,
-            child: Container(
-              margin: const EdgeInsets.symmetric(vertical: 4),
-              padding: const EdgeInsets.symmetric(
-                  vertical: 8, horizontal: 12),
-              decoration: BoxDecoration(
-                color: chats[index].user == User.ME
-                    ? Colors.yellow
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                chats[index].message,
-                style: TextStyle(
-                  color: ThemeColor.text,
-                  fontSize: 18,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              spacing: 5,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8, horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: chats[index].user == User.ME
+                        ? Colors.yellow
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    chats[index].message,
+                    style: TextStyle(
+                      color: ThemeColor.text,
+                      fontSize: 18,
+                    ),
+                  ),
                 ),
-              ),
+                Text(
+                  chats[index].time.hour >= 12
+                      ? "오전 ${DateFormat("hh:mm").format(chats[index].time)}"
+                      : "오후 ${DateFormat("hh:mm").format(chats[index].time)}",
+                )
+              ],
             ),
           );
         },
