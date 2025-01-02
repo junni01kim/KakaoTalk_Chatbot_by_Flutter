@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../gpt_api/gpt_api.dart';
 import 'chat.dart';
 
 /// 전송할 채팅 내역을 작성하는 위젯이다.
@@ -29,14 +30,15 @@ class _WritingField extends State<WritingField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 5,
         children: [
-          CupertinoSwitch(
-            value: _isChecked,
-            onChanged: (value) {
-              setState(() {
-                _isChecked = value;
-              });
-            },
-          ),
+          // TODO: 채팅 봇으로 변경함으로써, 스위치 버튼은 주석처리
+          // CupertinoSwitch(
+          //   value: _isChecked,
+          //   onChanged: (value) {
+          //     setState(() {
+          //       _isChecked = value;
+          //     });
+          //   },
+          // ),
           Expanded(
             child: TextField(
               controller: textFieldController,
@@ -51,9 +53,24 @@ class _WritingField extends State<WritingField> {
           IconButton(
             icon: Icon(Icons.send),
             onPressed: (){
-              !_isChecked && textFieldController.text != ""
-                  ? widget.addChat(Chat(User.ME, textFieldController.text))
-                  : widget.addChat(Chat(User.YOU, textFieldController.text));
+              String? response;
+              GptApi.question(textFieldController.text).then((value) {
+                response = value?.choices[0].message.content;
+              });
+              // !_isChecked && textFieldController.text != ""
+              //     ? widget.addChat(Chat(User.ME, textFieldController.text))
+              //     : widget.addChat(Chat(User.YOU, textFieldController.text));
+              if(textFieldController.text != "") {
+                widget.addChat(Chat(User.ME, textFieldController.text));
+
+                if(response == null) {
+                  widget.addChat(Chat(User.YOU, "응답 실패"));
+                }
+                else {
+                  widget.addChat(Chat(User.YOU, response!));
+                }
+              }
+
               textFieldController.text = "";
             },
           )
