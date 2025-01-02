@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import '../res/theme_color.dart';
 import 'chat.dart';
 
+/// 채팅 내역이 나타나는 위젯이다.
+///
+/// [chats] 채팅방에서 작성된 채팅 내역 `ChatRoomBody`  에서 참조하는 `property`이다.
 class ChatBoard extends StatelessWidget {
   final List<Chat> chats;
 

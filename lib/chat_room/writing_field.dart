@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'chat.dart';
 
+/// 전송할 채팅 내역을 작성하는 위젯이다.
+///
+/// [chats] 채팅방에서 작성된 채팅 내역 `ChatRoomBody`  에서 참조하는 `property`이다.
+/// [addChat] 새로운 채팅을 chats에 포함시키는 함수이다. 상태 Hoisting을 이용한다.
 class WritingField extends StatefulWidget {
   final List<Chat> chats;
   final Function(Chat) addChat;

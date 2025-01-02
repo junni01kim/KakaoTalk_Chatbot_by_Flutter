@@ -4,11 +4,11 @@ import '../res/theme_color.dart';
 import 'chat_room_list_body.dart';
 import 'chat_room_list_app_bar.dart';
 
-/**
- * 채팅방 정보를 볼 수 있는 클래스이다.
- *
- * 채팅방 생성과 입장을 할 수 있다.
- */
+
+/// 사용자 채팅방 리스트 최상위 컴포넌트이다.
+///
+/// 채팅방 생성과 입장을 할 수 있다.
+/// [ChatRoomList]은 `AppBar`와 `Body`로 구분된다.
 class ChatRoomList extends StatefulWidget {
   @override
   State<ChatRoomList> createState() => _ChatRoomListState();

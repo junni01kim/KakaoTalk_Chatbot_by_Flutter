@@ -7,11 +7,9 @@ void main() {
   runApp(const KakaoTalk());
 }
 
-/**
- * 상태 변형이 없는 위젯이다.
- *
- * 처음 생성되는 최상단 위젯
- */
+/// 상태 변형이 없는 위젯이다.
+///
+/// 처음 생성되는 최상단 위젯
 class KakaoTalk extends StatelessWidget {
   const KakaoTalk({super.key});
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// `ChatRoom`의 `AppBar`를 디자인한 위젯이다.
 class ChatRoomAppBar extends StatelessWidget {
   const ChatRoomAppBar({super.key});
 
