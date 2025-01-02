@@ -19,14 +19,15 @@ class _ChatRoomListState extends State<ChatRoomList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold( // 상단 제목
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: ChatRoomListAppBar(
-            onAddRoom: (String newRoomName) {
-              setState(() {
-                chatRoomNames.add(newRoomName);
-              });
-            }),
+          onAddRoom: (String newRoomName) {
+            setState(() {
+              chatRoomNames.add(newRoomName);
+            });
+          }),
       ),
 
       body: ChatRoomListBody(chatRoomNames: chatRoomNames,)

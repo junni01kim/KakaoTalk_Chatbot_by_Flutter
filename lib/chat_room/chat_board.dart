@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../res/theme_color.dart';
 import 'chat.dart';
 
 class ChatBoard extends StatelessWidget {
@@ -31,7 +32,8 @@ class ChatBoard extends StatelessWidget {
               ),
               child: Text(
                 chats[index].message,
-                style: const TextStyle(
+                style: TextStyle(
+                  color: ThemeColor.text,
                   fontSize: 18,
                 ),
               ),
