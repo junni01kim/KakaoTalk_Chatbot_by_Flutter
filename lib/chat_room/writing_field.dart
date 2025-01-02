@@ -19,29 +19,42 @@ class _WritingField extends State<WritingField> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        CupertinoSwitch(
-          value: _isChecked,
-          onChanged: (value) {
-            setState(() {
-              _isChecked = value;
-            });
-          },
-        ),
-        Expanded(
-            child: TextField( controller: textFieldController,)
-        ),
-        IconButton(
-          icon: Icon(Icons.send),
-          onPressed: (){
-            !_isChecked
-                ? widget.addChat(Chat(User.ME, textFieldController.text))
-                : widget.addChat(Chat(User.YOU, textFieldController.text));
-            textFieldController.text = "";
-          },
-        )
-      ],
+    return Container(
+      color: Colors.white,
+      child:  Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 5,
+        children: [
+          CupertinoSwitch(
+            value: _isChecked,
+            onChanged: (value) {
+              setState(() {
+                _isChecked = value;
+              });
+            },
+          ),
+          Expanded(
+            child: TextField(
+              controller: textFieldController,
+              decoration: InputDecoration(
+                border: InputBorder.none, // 하단 보라색 라인 제거
+                hintText: "메시지 입력",
+              ),
+              minLines: 1,
+              maxLines: 13,
+            )
+          ),
+          IconButton(
+            icon: Icon(Icons.send),
+            onPressed: (){
+              !_isChecked && textFieldController.text != ""
+                  ? widget.addChat(Chat(User.ME, textFieldController.text))
+                  : widget.addChat(Chat(User.YOU, textFieldController.text));
+              textFieldController.text = "";
+            },
+          )
+        ],
+      )
     );
   }
 
