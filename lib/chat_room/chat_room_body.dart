@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'chat.dart';
+import 'chat_board.dart';
 
 class ChatRoomBody extends StatefulWidget {
   final List<Chat> chats = [];
@@ -22,36 +23,7 @@ class _ChatRoomBody extends State<ChatRoomBody> {
         /**
          * 채팅 내역이 등장하는 공간
          */
-        Expanded(
-          child: ListView.builder( // 리스트 뷰
-            padding: const EdgeInsets.all(8),
-            itemCount: widget.chats.length,
-            itemBuilder: (context, index) {
-              return Align(
-                alignment: widget.chats[index].user == User.ME
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 4),
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 8, horizontal: 12),
-                  decoration: BoxDecoration(
-                    color: widget.chats[index].user == User.ME
-                        ? Colors.yellow
-                        : Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    widget.chats[index].message,
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
+        ChatBoard(chats: widget.chats),
 
         /**
          * 채팅 작성란
