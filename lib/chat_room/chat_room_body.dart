@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kakaotalk_chatbot_by_flutter/chat_room/writing_field.dart';
 
 import 'chat.dart';
 import 'chat_board.dart';
@@ -11,8 +12,6 @@ class ChatRoomBody extends StatefulWidget {
 
 class _ChatRoomBody extends State<ChatRoomBody> {
   final List<Chat> chats = [];
-  final textFieldController = TextEditingController();
-  bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,39 +26,15 @@ class _ChatRoomBody extends State<ChatRoomBody> {
         /**
          * 채팅 작성란
          */
-        Row(
-          children: [
-            CupertinoSwitch(
-              value: _isChecked,
-              onChanged: (value) {
-                setState(() {
-                  _isChecked = value;
-                });
-              },
-            ),
-            Expanded(
-              child: TextField( controller: textFieldController,)
-            ),
-            IconButton(
-                icon: Icon(Icons.send),
-                onPressed: (){
-                  setState(() {
-                    !_isChecked
-                        ? chats.add(Chat(User.ME, textFieldController.text))
-                        : chats.add(Chat(User.YOU, textFieldController.text));
-                    textFieldController.text = "";
-                  });
-                },
-            )
-          ],
-        )
+        WritingField(
+          chats: chats,
+          addChat: (value) {
+            setState(() {
+              chats.add(value);
+            });
+          },
+        ),
       ],
     );
-  }
-
-  @override
-  void dispose() {
-    textFieldController.dispose();
-    super.dispose();
   }
 }
